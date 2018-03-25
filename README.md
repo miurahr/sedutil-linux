@@ -1,40 +1,19 @@
-![alt tag](https://avatars0.githubusercontent.com/u/13870012?v=3&s=200)
+# sedutil-linuxpba
 
-This software is Copyright 2014-2017 Bright Plaza Inc. <drivetrust@drivetrust.com>
+This is my fork of [LinuxPBA](https://github.com/Drive-Trust-Alliance/sedutil/tree/master/LinuxPBA) from [Drive-Trust-Alliance/sedutil](https://github.com/Drive-Trust-Alliance/sedutil), suitable for use in an OPAL PBA. \
+It removes the 'debug' backdoor password and makes the messages a bit nicer.
 
-This file is part of sedutil.
+## Building
 
-sedutil is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+You can build the `linuxpba` binary with `make ARCH=xx` where `xx` is `32` or `64` if you want a 32-bit or 64-bit binary. \
+`ARCH` defaults to `64` if not specified. Binaries come out in the `dist` folder.
 
-sedutil is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+You can also pack this binary into a pre-built `UEFI64.img` or `BIOS32.img` from https://github.com/Drive-Trust-Alliance/exec, which you can then flash with `sedutil-cli --loadpbaimage`. \
+To do this, download `UEFI64.img.gz` or `BIOS32.img.gz` from https://github.com/Drive-Trust-Alliance/exec, unzip and place in the same folder as the `Makefile`, then run `make pbaimage ARCH=xx`.
 
-You should have received a copy of the GNU General Public License
-along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
+## Binaries
 
+Prebuilt binaries, both `linuxpba` only and PBA images, [are available here](https://github.com/stephensolis/sedutil-linuxpba/releases/latest).
 
-sedutil - The Drive Trust Alliance Self Encrypting Drive Utility
-
-This program and it's accompanying Pre-Boot Authorization image allow
-you to enable the locking in SED's that comply with the TCG OPAL 2.00
-standard on bios machines.   
-
-You must be administrator/root to run the host managment program
-
-In Linux libata.allow_tpm must be set to 1. Either via adding libata.allow_tpm=1 to the kernel flags at boot time 
-or changing the contents of /sys/module/libata/parameters/allow_tpm from a "0" to a "1" on a running system.
-
-***** sleep (S3) is not supported.
-
-Source code is available on GitHub at https://github.com/Drive-Trust-Alliance/sedutil 
-
-Linux and Windows executables are available at https://github.com/Drive-Trust-Alliance/sedutil/wiki/Executable-Distributions
-
-If you are looking for the PSID revert function see linux/PSIDRevert_LINUX.txt or win32/PSIDRevert_WINDOWS.txt
-
-PLEASE SEE CONTRIBUTING if you would like to make a code contribution.
+**DO NOT TRUST THESE BINARIES!** \
+**ALWAYS MANUALLY INSPECT ALL SOURCE CODE AND BUILD EVERYTHING YOURSELF ON A TRUSTED MACHINE!**

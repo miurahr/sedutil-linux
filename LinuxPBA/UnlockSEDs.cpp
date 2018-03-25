@@ -17,82 +17,70 @@ You should have received a copy of the GNU General Public License
 along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 
 * C:E********************************************************************** */
-#include "os.h"
-#include "UnlockSEDs.h"
+
+#include <algorithm>
+#include <dirent.h>
+#include <iostream>
+#include <memory>
+
 #include "DtaDevGeneric.h"
 #include "DtaDevOpal1.h"
 #include "DtaDevOpal2.h"
-
-#include <dirent.h>
-#include <fnmatch.h>
-#include <algorithm>
+#include "UnlockSEDs.h"
 
 using namespace std;
 
-uint8_t UnlockSEDs(char * password) {
-/* Loop through drives */
-    char devref[25];
-    int failed = 0;
-    DtaDev *tempDev;
-    DtaDev *d;
-    DIR *dir;
-    struct dirent *dirent;
-    vector<string> devices;
-     string tempstring;
-    LOG(D4) << "Enter UnlockSEDs";
-    dir = opendir("/dev");
-    if(dir!=NULL)
-    {
-        while((dirent=readdir(dir))!=NULL) {
-            if((!fnmatch("sd[a-z]",dirent->d_name,0)) || 
-                    (!fnmatch("nvme[0-9]",dirent->d_name,0)) ||
-                    (!fnmatch("nvme[0-9][0-9]",dirent->d_name,0))
-                    ) {
-                tempstring = dirent->d_name;
-                devices.push_back(tempstring);
-            }
-        }
-        closedir(dir);
-    }
-    std::sort(devices.begin(),devices.end());
-    printf("\nScanning....\n");
-    for(uint16_t i = 0; i < devices.size(); i++) {
-                snprintf(devref,23,"/dev/%s",devices[i].c_str());
-        tempDev = new DtaDevGeneric(devref);
-        if (!tempDev->isPresent()) {
-            break;
-        }
-        if ((!tempDev->isOpal1()) && (!tempDev->isOpal2())) {
-            printf("Drive %-10s %-40s not OPAL  \n", devref, tempDev->getModelNum());
+void UnlockSEDs(char *password) {
+	vector<string> devices;
+	DIR *dir = opendir("/dev");
+	if (dir != NULL) {
+		while (true) {
+			struct dirent *dirent = readdir(dir);
+			if (dirent == NULL) {
+				closedir(dir);
+				break;
+			}
+			string dev_name = dirent->d_name;
+			if (dev_name.compare(0, 2, "sd") == 0 || dev_name.compare(0, 4, "nvme") == 0) {
+				devices.push_back("/dev/" + dev_name);
+			}
+		}
+	}
+	sort(devices.begin(), devices.end());
 
-            delete tempDev;
-            continue;
-        }
-        if (tempDev->isOpal2())
-            d = new DtaDevOpal2(devref);
-        else
-            d = new DtaDevOpal1(devref);
-        delete tempDev;
-        d->no_hash_passwords = false;
-        failed = 0;
-        if (d->Locked()) {
-            if (d->MBREnabled()) {
-                if (d->setMBRDone(1, password)) {
-                    failed = 1;
-                }
-            }
-            if (d->setLockingRange(0, OPAL_LOCKINGSTATE::READWRITE, password)) {
-                failed = 1;
-            }
-            failed ? printf("Drive %-10s %-40s is OPAL Failed  \n", devref, d->getModelNum()) :
-                    printf("Drive %-10s %-40s is OPAL Unlocked   \n", devref, d->getModelNum());
-            delete d;
-        }
-        else {
-            printf("Drive %-10s %-40s is OPAL NOT LOCKED   \n", devref, d->getModelNum());
-            delete d;
-        }
+	cout << endl << endl << "[+] Unlocking devices..." << endl;
+	for (const string &dev_path : devices) {
+		unique_ptr<DtaDev> dev(new DtaDevGeneric(dev_path.c_str()));
+		string dev_descr = "Device " + dev_path + " (" + dev->getModelNum() + ")";
 
-    }
-    return 0x00;
-};
+		if (!dev->isPresent()) {
+			continue;
+		} else if (!dev->isOpal1() && !dev->isOpal2()) {
+			cout << "[i] " << dev_descr << " does not support encryption" << endl;
+			continue;
+		} else if (dev->isOpal2()) {
+			dev.reset(new DtaDevOpal2(dev_path.c_str()));
+		} else {
+			dev.reset(new DtaDevOpal1(dev_path.c_str()));
+		}
+		dev->no_hash_passwords = false;
+
+		if (dev->Locked()) {
+			bool failed = false;
+			if (dev->MBREnabled() && dev->setMBRDone(1, password)) {
+				failed = true;
+			}
+			if (dev->setLockingRange(0, OPAL_LOCKINGSTATE::READWRITE, password)) {
+				failed = true;
+			}
+
+			if (failed) {
+				cout << "\033[31m[!] " << dev_descr << " failed to decrypt\033[39m" << endl;
+			} else {
+				cout << "\033[32m[i] " << dev_descr << " was decrypted successfully\033[39m" << endl;
+			}
+		} else {
+			cout << "[i] " << dev_descr << " is not encrypted" << endl;
+		}
+	}
+}

@@ -13,7 +13,7 @@ To do this, download `UEFI64.img.gz` or `BIOS32.img.gz` from https://github.com/
 
 ## Binaries
 
-Prebuilt binaries, both `linuxpba` only and PBA images, [are available here](https://github.com/stephensolis/sedutil-linuxpba/releases/latest).
+A prebuilt `linuxpba` 64-bit binary and `UEFI64` image [are available here](https://github.com/stephensolis/sedutil-linuxpba/releases/latest).
 
 **DO NOT TRUST THESE BINARIES!** \
 **ALWAYS MANUALLY INSPECT ALL SOURCE CODE AND BUILD EVERYTHING YOURSELF ON A TRUSTED MACHINE!**

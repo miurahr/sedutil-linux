@@ -19,7 +19,9 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 * C:E********************************************************************** */
 
 #include <algorithm>
+#include <cctype>
 #include <dirent.h>
+#include <functional>
 #include <iostream>
 #include <memory>
 
@@ -29,6 +31,22 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 #include "UnlockSEDs.h"
 
 using namespace std;
+
+string trim_str(const string &s) {
+	auto is_space_fn = ptr_fun<int, int>(std::isspace);
+	auto start_pos = find_if_not(s.begin(), s.end(), is_space_fn);
+	auto end_pos = find_if_not(s.rbegin(), s.rend(), is_space_fn).base();
+	if (end_pos <= start_pos) {
+		return "";
+	} else {
+		return string(start_pos, end_pos);
+	}
+}
+
+bool is_disk_device(const string &dev_name) {
+	return (dev_name.length() == 3 && dev_name.compare(0, 2, "sd") == 0) ||
+			(dev_name.length() == 5 && dev_name.compare(0, 4, "nvme") == 0);
+}
 
 void UnlockSEDs(char *password) {
 	vector<string> devices;
@@ -41,7 +59,7 @@ void UnlockSEDs(char *password) {
 				break;
 			}
 			string dev_name = dirent->d_name;
-			if (dev_name.compare(0, 2, "sd") == 0 || dev_name.compare(0, 4, "nvme") == 0) {
+			if (is_disk_device(dev_name)) {
 				devices.push_back("/dev/" + dev_name);
 			}
 		}
@@ -51,7 +69,7 @@ void UnlockSEDs(char *password) {
 	cout << endl << endl << "[+] Unlocking devices..." << endl;
 	for (const string &dev_path : devices) {
 		unique_ptr<DtaDev> dev(new DtaDevGeneric(dev_path.c_str()));
-		string dev_descr = "Device " + dev_path + " (" + dev->getModelNum() + ")";
+		string dev_descr = "Device " + dev_path + " (" + trim_str(dev->getModelNum()) + ")";
 
 		if (!dev->isPresent()) {
 			continue;

@@ -1,8 +1,8 @@
 .PHONY: all build-dirs linuxpba pbaimage clean
 
 ARCH ?= 64
-CC = gcc-4.9
-CXX = g++-4.9
+CC = gcc
+CXX = g++
 ARCHFLAGS = -m$(ARCH)
 COMMONFLAGS = $(ARCHFLAGS) -Wall -O2
 CFLAGS = $(COMMONFLAGS) -std=c99

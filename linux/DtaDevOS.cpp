@@ -73,19 +73,19 @@ void DtaDevOS::init(const char * devref)
 	else 
         {
 		LOG(E) << "DtaDevOS::init ERROR - unknown drive type";
-                isOpen = FALSE;
+                isOpen = false;
                 return;
         }
 
 	if (drive->init(devref))
 	{
-		isOpen = TRUE;
+		isOpen = true;
 		drive->identify(disk_info);
 		if (disk_info.devType != DEVICE_TYPE_OTHER)
 			discovery0();
 	}
 	else
-		isOpen = FALSE;
+		isOpen = false;
 
 	return;
 }

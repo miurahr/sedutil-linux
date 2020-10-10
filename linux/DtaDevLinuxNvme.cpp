@@ -48,10 +48,10 @@ bool DtaDevLinuxNvme::init(const char * devref)
 {
     LOG(D1) << "Creating DtaDevLinuxNvme::DtaDev() " << devref;
     ifstream kopts;
-    bool isOpen = FALSE;
+    bool isOpen = false;
 
     if ((fd = open(devref, O_RDWR)) < 0) {
-        isOpen = FALSE;
+        isOpen = false;
         // This is a D1 because diskscan looks for open fail to end scan
         LOG(D1) << "Error opening device " << devref << " " << (int32_t) fd;
         if (-EPERM == fd) {
@@ -60,7 +60,7 @@ bool DtaDevLinuxNvme::init(const char * devref)
         }
     }
     else {
-        isOpen = TRUE;
+        isOpen = true;
     }
 	return isOpen;
 }

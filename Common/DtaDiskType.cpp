@@ -23,16 +23,9 @@ using namespace std;
 
 DtaDiskType::DtaDiskType() {}
 DtaDiskType::~DtaDiskType() {}
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable:4100)
-#endif
 void DtaDiskType::init(const char * devref) {}
 uint8_t	DtaDiskType::sendCmd(ATACOMMAND cmd, uint8_t protocol, uint16_t comID,
 	void * buffer, uint32_t bufferlen) {
 	return 10;
 }
 void DtaDiskType::identify(OPAL_DiskInfo& disk_info) {}
-#ifdef _MSC_VER
-#pragma warning(pop)
-#endif

@@ -25,3 +25,7 @@ $RECYCLE.BIN/
 .deps/
 *.o
 .dirstamp
+
+# CLion
+cmake-build-*
+.idea

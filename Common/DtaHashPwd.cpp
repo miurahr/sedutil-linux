@@ -17,12 +17,16 @@ You should have received a copy of the GNU General Public License
 along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 
  * C:E********************************************************************** */
+#include <cstdlib>
+#include <cstdint>
+#include <unistd.h>
+#include <cstring>
+#include <cerrno>
+#include <cassert>
+#include "DtaConstants.h"
 #include "os.h"
 #include <iostream>
-#include <iomanip>
 #include "DtaHashPwd.h"
-#include "DtaLexicon.h"
-#include "DtaOptions.h"
 #include "DtaDev.h"
 #include "log.h"
 

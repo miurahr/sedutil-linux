@@ -17,25 +17,19 @@ You should have received a copy of the GNU General Public License
 along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 
  * C:E********************************************************************** */
-#ifdef _MSC_VER
-#pragma warning(push)
-#pragma warning(disable:4100)
-#endif
-
+#include <cstdlib>
+#include <cstdint>
+#include <unistd.h>
+#include <cstring>
+#include <cerrno>
+#include <cassert>
+#include "DtaConstants.h"
 #include "os.h"
-#include <stdio.h>
 #include <iostream>
-#include <fstream>
-#include<iomanip>
-#include "DtaOptions.h"
 #include "DtaDevGeneric.h"
-#include "DtaHashPwd.h"
-#include "DtaEndianFixup.h"
-#include "DtaStructures.h"
 #include "DtaCommand.h"
 #include "DtaResponse.h"
 #include "DtaSession.h"
-#include "DtaHexDump.h"
 
 using namespace std;
 

@@ -65,7 +65,7 @@ isSAS = 0;
 bool DtaDevLinuxSata::init(const char * devref)
 {
     LOG(D1) << "Creating DtaDevLinuxSata::DtaDev() " << devref;
-	bool isOpen = FALSE;
+	bool isOpen = false;
 
     if(access("/dev/sda", R_OK | W_OK)) {
         LOG(E) << "You do not have permission to access the raw disk in write mode";
@@ -73,7 +73,7 @@ bool DtaDevLinuxSata::init(const char * devref)
     }
 
     if ((fd = open(devref, O_RDWR)) < 0) {
-        isOpen = FALSE;
+        isOpen = false;
         // This is a D1 because diskscan looks for open fail to end scan
         LOG(D1) << "Error opening device " << devref << " " << (int32_t) fd;
         //        if (-EPERM == fd) {
@@ -82,7 +82,7 @@ bool DtaDevLinuxSata::init(const char * devref)
         //        }
     }
     else {
-        isOpen = TRUE;
+        isOpen = true;
     }
 	return isOpen;
 }

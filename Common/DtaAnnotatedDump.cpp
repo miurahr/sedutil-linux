@@ -18,21 +18,23 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 
  * C:E********************************************************************** */
 
-
-#include "os.h"
-#include <stdio.h>
+#include <cstdlib>
+#include <cstdint>
+#include <unistd.h>
+#include <cstring>
+#include <cerrno>
+#include <cassert>
+#include <cstdio>
 #include <iostream>
-#include <fstream>
-#include <iomanip>
-#include "DtaDevEnterprise.h"
+
+#include "DtaConstants.h"
 #include "DtaHashPwd.h"
 #include "DtaEndianFixup.h"
 #include "DtaStructures.h"
 #include "DtaCommand.h"
 #include "DtaResponse.h"
-#include "DtaSession.h"
-#include "DtaHexDump.h"
 #include "DtaAnnotatedDump.h"
+#include "log.h"
 
 using namespace std;
 

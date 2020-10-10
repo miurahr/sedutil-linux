@@ -18,18 +18,12 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 
  * C:E********************************************************************** */
 #pragma once
-#include <stdlib.h>
-#include <stdint.h>
+#include <cstdlib>
+#include <cstdint>
 #include <unistd.h>
-#include <string.h>
-#include <errno.h>
-#include <assert.h>
+#include <cstring>
+#include <cerrno>
+#include <cassert>
 #include "DtaConstants.h"
 #include "log.h"
-// Why can't I find these??
-#define TRUE 1
-#define FALSE 0
-// a few OS specific methods that need to be worked out
-#define SNPRINTF snprintf
-#define DEVICEMASK snprintf(devname,23,"/dev/sd%c",(char) 0x61+i)
 #define DEVICEEXAMPLE "/dev/sdc"

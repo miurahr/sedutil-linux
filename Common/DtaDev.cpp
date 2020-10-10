@@ -22,16 +22,23 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
  * implementing sendcmd, osmsSleep and identify 
  * specific to the IO requirements of that OS
  */
-#include "os.h"
-#include <stdio.h>
+#include <cstdlib>
+#include <cstdint>
+#include <unistd.h>
+#include <cstring>
+#include <cerrno>
+#include <cassert>
+#include <cstdio>
 #include <iostream>
 #include <iomanip>
+#include "DtaConstants.h"
 #include "DtaOptions.h"
 #include "DtaDev.h"
 #include "DtaStructures.h"
 #include "DtaConstants.h"
 #include "DtaEndianFixup.h"
 #include "DtaHexDump.h"
+#include "log.h"
 
 using namespace std;
 

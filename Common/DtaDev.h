@@ -287,7 +287,7 @@ public:
 	sedutiloutput output_format; /** standard, readable, JSON */
 protected:
 	const char * dev;   /**< character string representing the device in the OS lexicon */
-	uint8_t isOpen = FALSE;  /**< The device has been opened */
+	uint8_t isOpen = false;  /**< The device has been opened */
 	OPAL_DiskInfo disk_info;  /**< Structure containing info from identify and discovery 0 */
 	DtaResponse response;   /**< shared response object */
 	DtaResponse propertiesResponse;  /**< response fron properties exchange */

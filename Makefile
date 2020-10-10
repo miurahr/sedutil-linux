@@ -20,10 +20,10 @@ CXX_OBJECTS = $(patsubst %.cpp,%.o,$(addprefix $(BUILD_DIR)/,$(CXX_SOURCES)))
 OBJECTS = $(C_OBJECTS) $(CXX_OBJECTS)
 
 ifeq ($(ARCH),64)
-	PBAIMAGE_SRC = $(wildcard UEFI64-*.img)
+	PBAIMAGE_SRC = $(wildcard UEFI64*.img)
 	PBAIMAGE_ROOTFS_PATH = EFI/boot/rootfs.cpio.xz
 else
-	PBAIMAGE_SRC = $(wildcard BIOS32-*.img)
+	PBAIMAGE_SRC = $(wildcard BIOS32*.img)
 	PBAIMAGE_ROOTFS_PATH = boot/extlinux/rootfs.cpio.xz
 endif
 PBAIMAGE_DEST = $(patsubst %,patched-%,$(PBAIMAGE_SRC))

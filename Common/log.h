@@ -42,9 +42,8 @@
 #include <string>
 #include <cstdio>
 #include <cstdlib>
-#include <ctime>
-#include <sys/time.h>
 #include <cmath>
+#include <ctime>
 #include "DtaOptions.h"
 
 inline std::string NowTime();

@@ -1,0 +1,26 @@
+#!/bin/bash
+
+ifeq ($(ARCH),64)
+	PBAIMAGE_SRC = $(wildcard UEFI64*.img)
+	PBAIMAGE_ROOTFS_PATH = EFI/boot/rootfs.cpio.xz
+else
+	PBAIMAGE_SRC = $(wildcard BIOS32*.img)
+	PBAIMAGE_ROOTFS_PATH = boot/extlinux/rootfs.cpio.xz
+endif
+PBAIMAGE_DEST = $(patsubst %,patched-%,$(PBAIMAGE_SRC))
+
+
+cp $(PBAIMAGE_SRC) $(PBAIMAGE_DEST)
+mkdir -p tmp/img-mnt
+sudo mount -o loop,rw,offset=1048576 $(PBAIMAGE_DEST) tmp/img-mnt
+cp tmp/img-mnt/$(PBAIMAGE_ROOTFS_PATH) tmp
+
+mkdir -p tmp/root
+xz -d tmp/rootfs.cpio.xz
+cd tmp/root && sudo cpio -idm < ../rootfs.cpio
+sudo cp $(DIST_DIR)/linuxpba tmp/root/sbin
+sudo chown root:root tmp/root
+cd tmp/root && cpio -t < ../rootfs.cpio | sudo cpio -o -H newc | xz -9 -C crc32 > ../new-rootfs.cpio.xz
+
+sudo cp tmp/new-rootfs.cpio.xz tmp/img-mnt/$(PBAIMAGE_ROOTFS_PATH)
+sudo umount tmp/img-mnt

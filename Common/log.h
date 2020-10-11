@@ -43,6 +43,8 @@
 #include <cstdio>
 #include <cstdlib>
 #include <ctime>
+#include <sys/time.h>
+#include <cmath>
 #include "DtaOptions.h"
 
 inline std::string NowTime();
@@ -313,13 +315,20 @@ extern sedutiloutput outputFormat;
 inline std::string NowTime() {
     char buffer[11];
     time_t t;
-    time(&t);
+    long ms;
+    struct timespec spec;
+
+    timespec_get(&spec, TIME_UTC);
     tm r = {0};
+    t = spec.tv_sec;
+    ms = round(spec.tv_nsec / 1.0e6);
+    if (ms>999) {
+        t++;
+        ms = 0;
+    }
     strftime(buffer, sizeof (buffer), "%X", localtime_r(&t, &r));
-    struct timeval tv;
-    gettimeofday(&tv, 0);
     char result[100] = {0};
-    snprintf(result, 95, "%s.%03ld", buffer, (long) tv.tv_usec / 1000);
+    snprintf(result, 95, "%s.%03ld", buffer, ms);
     return result;
 }
 

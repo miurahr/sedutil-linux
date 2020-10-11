@@ -35,6 +35,7 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 #include "DtaSession.h"
 #include "DtaHexDump.h"
 #include "DtaAnnotatedDump.h"
+#include "log.h"
 
 using namespace std;
 

@@ -24,12 +24,12 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 #include <cerrno>
 #include <cassert>
 #include "DtaConstants.h"
-#include "os.h"
 #include <iostream>
 #include "DtaDevGeneric.h"
 #include "DtaCommand.h"
 #include "DtaResponse.h"
 #include "DtaSession.h"
+#include "log.h"
 
 using namespace std;
 

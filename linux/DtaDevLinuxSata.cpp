@@ -17,7 +17,6 @@ You should have received a copy of the GNU General Public License
 along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 
  * C:E********************************************************************** */
-#include "os.h"
 #include <malloc.h>
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -25,15 +24,18 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 #include <sys/ioctl.h>
 #include <arpa/inet.h>
 #include <scsi/sg.h>
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 #include <unistd.h>
 #include <linux/hdreg.h>
-#include <errno.h>
+#include <cerrno>
 #include <vector>
 #include <fstream>
 #include "DtaDevLinuxSata.h"
 #include "DtaHexDump.h"
+#include "DtaConstants.h"
+#include "log.h"
+
 //
 // taken from <scsi/scsi.h> to avoid SCSI/ATA name collision
 // 

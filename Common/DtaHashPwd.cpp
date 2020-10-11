@@ -24,7 +24,6 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 #include <cerrno>
 #include <cassert>
 #include "DtaConstants.h"
-#include "os.h"
 #include <iostream>
 #include "DtaHashPwd.h"
 #include "DtaDev.h"

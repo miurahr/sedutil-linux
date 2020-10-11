@@ -26,6 +26,8 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 #include "DtaConstants.h"
 #include "DtaResponse.h"
 #include "DtaEndianFixup.h"
+#include "log.h"
+
 using namespace std;
 
 DtaResponse::DtaResponse()

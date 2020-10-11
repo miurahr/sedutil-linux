@@ -18,7 +18,6 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 
  * C:E********************************************************************** */
 #pragma once
-#include "os.h"
 #include "DtaDevOpal.h"
 
 using namespace std;

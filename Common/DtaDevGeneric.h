@@ -20,7 +20,6 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 class DtaCommand;
 class DtaSession;
-#include "os.h"
 #include "DtaDev.h"
 #include "DtaDevOS.h"
 #include "DtaStructures.h"   

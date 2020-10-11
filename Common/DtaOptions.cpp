@@ -20,16 +20,19 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 #include <cstdlib>
 #include <cstdint>
 #include <unistd.h>
+#include <cstdio>
 #include <cstring>
 #include <cerrno>
 #include <cassert>
 #include "DtaConstants.h"
 #include "DtaOptions.h"
 #include "DtaLexicon.h"
+#include "log.h"
 
 #ifndef GIT_VERSION
 #define GIT_VERSION "1.15.1"
 #endif
+#define DEVICEEXAMPLE "/dev/sdc"
 
 void usage()
 {

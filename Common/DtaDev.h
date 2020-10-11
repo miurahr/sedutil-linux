@@ -23,6 +23,8 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 #include <vector>
 #include "DtaOptions.h"
 #include "DtaResponse.h"
+#include "DtaConstants.h"
+
 class DtaCommand;
 class DtaSession;
 

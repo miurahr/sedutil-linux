@@ -19,7 +19,6 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
  * C:E********************************************************************** */
 #include <cstdint>
 #include <cstring>
-#include <os.h>
 #include "DtaConstants.h"
 #include "DtaSession.h"
 #include "DtaDev.h"

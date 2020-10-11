@@ -22,7 +22,6 @@ along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 class DtaCommand;
 class DtaSession;
 
-#include "os.h"
 #include "DtaOptions.h"
 #include "DtaDev.h"
 #include "DtaDevOS.h"

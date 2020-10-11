@@ -17,21 +17,21 @@ You should have received a copy of the GNU General Public License
 along with sedutil.  If not, see <http://www.gnu.org/licenses/>.
 
  * C:E********************************************************************** */
-#include "os.h"
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <scsi/sg.h>
-#include <stdio.h>
-#include <string.h>
+#include <cstdio>
+#include <cstring>
 #include <unistd.h>
 #include <linux/hdreg.h>
-#include <errno.h>
+#include <cerrno>
 #include <vector>
 #include <fstream>
 #include "DtaDevLinuxNvme.h"
 #include "DtaHexDump.h"
+#include "log.h"
 
 #define  NVME_SECURITY_SEND 0x81
 #define  NVME_SECURITY_RECV 0x82

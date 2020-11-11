@@ -5,6 +5,7 @@ This is a fork of [LinuxPBA](https://github.com/Drive-Trust-Alliance/sedutil/tre
 ## Dependency
 
 The project depend on CMake, Ninja build tool, and C++ compiler such as gcc or clang which support C++11 standard.
+Google Test library is necessary to test.
 
 ## Building
 

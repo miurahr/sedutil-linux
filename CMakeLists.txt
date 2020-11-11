@@ -36,3 +36,5 @@ add_executable(linuxpba
                prebootauth/LinuxPBA.cpp
                )
 add_executable(sedutil-cli cli/DtaOptions.cpp cli/sedutil.cpp)
+
+add_subdirectory(tests EXCLUDE_FROM_ALL)

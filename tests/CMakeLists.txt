@@ -1,0 +1,5 @@
+include(GoogleTest)
+find_package(GTest REQUIRED)
+add_executable(tests test1.cpp)
+target_link_libraries(tests GTest::GTest)
+gtest_discover_tests(tests)

@@ -9,3 +9,7 @@ The project depend on CMake, Ninja build tool, and C++ compiler such as gcc or c
 ## Building
 
 You can build the binary with `cmake`. Curreltly it is supported only for 64-bit Linux OS for IA architecture(amd64).
+
+## Status
+
+It is considered **Alpha** status and not secure.

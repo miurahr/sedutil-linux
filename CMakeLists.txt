@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
-project(sedutil-linuxpba LANGUAGES C CXX)
+project(sedutil LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 11)
 add_compile_options(-m64 -Wall -O2)
+add_link_options(-static -static-libgcc -static-libstdc++)
 include_directories(linux prebootauth cli common common/pbkdf2)
 
 add_library(common OBJECT

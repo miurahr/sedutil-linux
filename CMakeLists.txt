@@ -26,6 +26,7 @@ add_library(common OBJECT
             common/pbkdf2/hmac.c
             )
 add_library(linuxdevice OBJECT
+            linux/DtaDevLinuxDrive.cpp
             linux/DtaDevLinuxNvme.cpp
             linux/DtaDevLinuxSata.cpp
             linux/DtaDevOS.cpp

@@ -97,6 +97,7 @@ typedef enum _sedutiloption {
     printDefaultPassword,
 	rawCmd,
 	printPasswordHash,
+	prepareForS3Sleep,
 
 } sedutiloption;
 /** verify the number of arguments passed */

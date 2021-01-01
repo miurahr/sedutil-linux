@@ -271,6 +271,10 @@ int main(int argc, char * argv[])
 		LOG(D) << "Performing cmdDump ";
 		return d->rawCmd(argv[argc - 7], argv[argc - 6], argv[argc - 5], argv[argc - 4], argv[argc - 3], argv[argc - 2]);
 		break;
+	case sedutiloption::prepareForS3Sleep:
+        LOG(D) << "Preparing for S3 sleep " << (uint16_t) opts.lockingrange;
+        return d->prepareForS3Sleep(opts.lockingrange, argv[opts.password]);
+		break;
     default:
         LOG(E) << "Unable to determine what you want to do ";
         usage();

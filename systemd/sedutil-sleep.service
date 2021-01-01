@@ -1,0 +1,12 @@
+[Unit]
+Description=sedutil-sleep
+
+[Service]
+Type=oneshot
+#Add as many ExecStart lines as needed here
+ExecStart=-+/usr/bin/sedutil -n -x --prepareForS3Sleep 0 hash /dev/device
+#ExecStart=-+/usr/bin/sedutil -n -x --prepareForS3Sleep 0 hash2 /dev/device
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target

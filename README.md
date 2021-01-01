@@ -1,6 +1,7 @@
-# sedutil-linux
+# sedutil for linux
 
 This is a fork of [LinuxPBA](https://github.com/Drive-Trust-Alliance/sedutil/tree/master/LinuxPBA) from [Drive-Trust-Alliance/sedutil](https://github.com/Drive-Trust-Alliance/sedutil) via [stephensolis fork](https://github.com/stephensolis/sedutil-linuxpba) , suitable for use in an OPAL PBA. 
+And it imports modifications on https://github.com/gebart/opal-kexec-pba and https://github.com/fabiogermann/sedutil.git
 
 ## Dependency
 
